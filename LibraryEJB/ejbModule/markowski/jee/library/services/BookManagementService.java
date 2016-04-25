@@ -24,7 +24,7 @@ public class BookManagementService {
 	SessionContext sessionContext;
 
 	public List<Book> getBooks() {
-		return em.createQuery("Select book From BOOKS book", Book.class)
+		return em.createQuery("Select b From Book b", Book.class)
 			.getResultList();
 	}
 

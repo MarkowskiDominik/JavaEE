@@ -24,7 +24,7 @@ public class AuthorManagementService {
 	SessionContext sessionContext;
 
 	public List<Author> getAuthors() {
-		return em.createQuery("Select author From AUTHORS author", Author.class)
+		return em.createQuery("Select a From Author a", Author.class)
 			.getResultList();
 	}
 
