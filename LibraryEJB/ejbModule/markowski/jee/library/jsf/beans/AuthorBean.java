@@ -17,8 +17,22 @@ public class AuthorBean {
 
 	@EJB
 	AuthorManagementService authorService;
-	
+
 	public List<Author> getAuthors() {
 		return authorService.getAuthors();
 	}
+
+	private Author author;
+
+	public Author getAuthor() {
+		if (author == null) {
+			author = new Author();
+		}
+		return author;
+	}
+
+	public void addNewAuthor() {
+		authorService.addNewAuthor(author);
+	}
+
 }

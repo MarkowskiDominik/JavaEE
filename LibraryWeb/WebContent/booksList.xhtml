@@ -5,16 +5,17 @@
 	xmlns:p="http://primefaces.org/ui" template="/layout/default.xhtml">
 
 	<ui:define name="content">
-		<p:dataTable var="author" value="#{authorBean.authors}">
+		<p:dataTable var="book" value="#{bookBean.books}">
 			<p:column headerText="Id">
-				<h:outputText value="#{author.id}" />
+				<h:outputText value="#{book.id}" />
 			</p:column>
-			<p:column headerText="Name">
-				<h:outputText value="#{author.name}" />
+			<p:column headerText="Title">
+				<h:outputText value="#{book.title}" />
 			</p:column>
 		</p:dataTable>
 		<h:form>
-			<h:link value="Add new author..." outcome="addNewAuthor" rendered="#{request.isUserInRole('OWNER')}" />
+			<h:link value="Add new book..." outcome="addNewBook"
+				rendered="#{request.isUserInRole('OWNER')}" />
 		</h:form>
 	</ui:define>
 </ui:composition>

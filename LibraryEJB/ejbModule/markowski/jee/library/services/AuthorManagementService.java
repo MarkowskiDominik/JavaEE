@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.LocalBean;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
@@ -25,7 +26,12 @@ public class AuthorManagementService {
 
 	public List<Author> getAuthors() {
 		return em.createQuery("Select a From Author a", Author.class)
-			.getResultList();
+				.getResultList();
+	}
+
+	@RolesAllowed("OWNER")
+	public void addNewAuthor(Author author) {
+		em.persist(author);
 	}
 
 }

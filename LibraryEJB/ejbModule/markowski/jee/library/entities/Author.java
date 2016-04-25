@@ -12,7 +12,7 @@ public class Author {
 
 	@Id
 	@Column(name = "ID")
-	@javax.persistence.GeneratedValue(strategy = GenerationType.AUTO)
+	@javax.persistence.GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name = "NAME")

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/layout/default.xhtml">
+
+	<ui:define name="content">
+		<h:form>
+			<h:inputText id="bookTitleId" value="#{bookBean.book.title}"
+				required="true" />
+			<h:messages for="bookTitleId" />
+			<h:commandButton action="#{bookBean.addNewBook}" value="Add" />
+		</h:form>
+
+		<hr />
+
+		<h:form>
+			<h:link value="Back to books list" outcome="booksList" />
+		</h:form>
+
+	</ui:define>
+</ui:composition>

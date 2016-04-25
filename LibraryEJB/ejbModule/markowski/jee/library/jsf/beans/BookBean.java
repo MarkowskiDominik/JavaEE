@@ -21,4 +21,17 @@ public class BookBean {
 	public List<Book> getBooks() {
 		return bookService.getBooks();
 	}
+	
+	private Book book;
+
+	public Book getBook() {
+		if (book == null) {
+			book = new Book();
+		}
+		return book;
+	}
+
+	public void addNewBook() {
+		bookService.addNewBook(book);
+	}
 }

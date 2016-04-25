@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.LocalBean;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
@@ -25,7 +26,12 @@ public class BookManagementService {
 
 	public List<Book> getBooks() {
 		return em.createQuery("Select b From Book b", Book.class)
-			.getResultList();
+				.getResultList();
+	}
+
+	@RolesAllowed("OWNER")
+	public void addNewBook(Book book) {
+		em.persist(book);
 	}
 
 }
