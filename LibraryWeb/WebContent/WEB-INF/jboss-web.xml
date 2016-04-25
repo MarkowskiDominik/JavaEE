@@ -1,0 +1,3 @@
+<jboss-web>
+  		  <security-domain>LibrarySecureDomain</security-domain>
+</jboss-web>

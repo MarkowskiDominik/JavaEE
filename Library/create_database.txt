@@ -1,0 +1,122 @@
+CREATE TABLE authors (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+
+INSERT INTO authors (name)
+VALUES
+    ('Adam Mickiewicz'),
+    ('Henryk Sienkiewicz'),
+    ('Jacek Piekara'),
+    ('Jaroslaw Grzedowicz');
+
+
+CREATE TABLE books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(50) NOT NULL
+);
+
+INSERT INTO books (title)
+VALUES
+    ('Pan Tadeusz'),
+    ('Dziady'),
+    ('Potop'),
+    ('Quo vadis'),
+    ('Sluga Bozy'),
+    ('Mlot na czarownice'),
+    ('Pan Lodowego Ogrodu'),
+    ('Ksiega jesiennych demonów');
+
+
+CREATE TABLE AUTHOR_BOOK (
+    author_id INT NOT NULL,
+    book_id INT NOT NULL,
+    PRIMARY KEY (author_id, book_id),
+    FOREIGN KEY (author_id) REFERENCES authors(id),
+    FOREIGN KEY (book_id) REFERENCES books(id)
+);
+
+INSERT INTO author_book (author_id, book_id)
+VALUES
+    (1, 1),
+    (1, 2),
+    (2, 3),
+    (2, 4),
+    (3, 5),
+    (3, 6),
+    (4, 7),
+    (4, 6);
+
+
+SELECT b.title, a.name
+FROM BOOKS as b, AUTHORS as a, AUTHOR_BOOK as ab
+WHERE b.id = ab.book_id AND a.id = ab.author_id;
+
+
+CREATE TABLE users (
+    login VARCHAR(50) NOT NULL PRIMARY KEY,
+    password VARCHAR(50) NOT NULL
+);
+
+INSERT INTO users (login, password)
+VALUES
+    ('owner', 'TBApaX7jWHFdOhSirdgXxLAWUUQN6Ag3H3gWWskNxYE='),
+    ('user', 'BPiZbadjt6lpsQKO4wB1aerzpjVIbdqyEdUSyFud+Ps=');
+
+CREATE TABLE roles (
+     id INT NOT NULL PRIMARY KEY,
+     role_name VARCHAR(50) NOT NULL
+);
+
+INSERT INTO roles
+VALUES
+    (1, 'OWNER'),
+    (2, 'USER');
+
+CREATE TABLE user_role (
+     user_login VARCHAR(50) NOT NULL,
+     role_id INT NOT NULL,
+     PRIMARY KEY (user_login, role_id),
+     FOREIGN KEY (user_login) REFERENCES users(login),
+     FOREIGN KEY (role_id) REFERENCES roles(id)
+);
+
+INSERT INTO user_role 
+VALUES 
+    ('owner', 1),
+    ('user', 2);
+
+SELECT u.login, u.password, r.role_name
+FROM USERS as u, ROLES as r, USER_ROLE as ur
+WHERE u.login = ur.user_login AND ur.role_id = r.id;
+
+
+CREATE TABLE borrows (
+    id INT PRIMARY KEY,
+    user_login VARCHAR(50) NOT NULL,
+    book_id INT NOT NULL,
+    FOREIGN KEY (user_login) REFERENCES users(login),
+    FOREIGN KEY (book_id) REFERENCES books(id)
+);
+
+INSERT INTO borrows (user_login, book_id)
+VALUES
+    ('user', 1),
+    ('user',  5);
+
+
+SELECT u.login, b.title 
+FROM USERS as u, BOOKS as b, BORROWS as bor
+WHERE u.login = bor.user_login AND bor.book_id = b.id;
+
+
+CREATE VIEW userview(username, passwd) AS 
+SELECT LOGIN, PASSWORD
+FROM USERS;
+
+CREATE VIEW rolesview(username, role) AS
+SELECT u.LOGIN, r.ROLE_NAME
+FROM USER_ROLE ur, ROLES r, USERS u
+WHERE
+  ur.USER_LOGIN = u.LOGIN
+  AND ur.ROLE_ID = r.ID;
