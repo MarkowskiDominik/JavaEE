@@ -1,7 +1,6 @@
 package markowski.jee.todo.service;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
