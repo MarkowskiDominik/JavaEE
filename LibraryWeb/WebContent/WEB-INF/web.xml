@@ -26,6 +26,17 @@
 		</auth-constraint>
 	</security-constraint>
 	
+	<security-constraint>
+		<display-name>unsecured</display-name>
+		<web-resource-collection>
+			<web-resource-name>login-sites</web-resource-name>
+			<url-pattern>/login/*</url-pattern>
+		</web-resource-collection>
+		<user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+	</security-constraint>
+	
 	<security-role>
 		<role-name>USER</role-name>
 	</security-role>
