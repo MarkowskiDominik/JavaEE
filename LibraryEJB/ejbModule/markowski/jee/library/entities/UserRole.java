@@ -16,19 +16,19 @@ public class UserRole {
 	@Id
 	@Column(name = "USER_LOGIN")
 	private String userLogin;
-	
+
 	@Id
 	@Column(name = "ROLE_ID")
 	private Integer roleId;
 
-	protected UserRole(){
+	protected UserRole() {
 	}
-	
+
 	public UserRole(String userLogin, Integer roleId) {
 		this.userLogin = userLogin;
 		this.roleId = roleId;
 	}
-	
+
 	public String getUserLogin() {
 		return userLogin;
 	}

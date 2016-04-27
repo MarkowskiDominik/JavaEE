@@ -18,6 +18,9 @@ import markowski.jee.library.entities.UserRole;
 @PermitAll
 public class UserManagementService {
 
+	private static final int OWNER_ROLE_ID = 1;
+	private static final int USER_ROLE_ID = 2;
+
 	@PersistenceContext(unitName = "LibraryPU")
 	EntityManager em;
 
@@ -31,8 +34,13 @@ public class UserManagementService {
 
 	public void registerNewUser(User user) {
 		em.persist(user);
-		UserRole userRole = new UserRole(user.getLogin(), 1);
+		UserRole userRole = new UserRole(user.getLogin(), USER_ROLE_ID);
 		em.persist(userRole);
 	}
 
+	public void registerNewOwner(User owner) {
+		em.persist(owner);
+		UserRole userRole = new UserRole(owner.getLogin(), OWNER_ROLE_ID);
+		em.persist(userRole);
+	}
 }

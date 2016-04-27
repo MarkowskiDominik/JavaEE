@@ -14,7 +14,7 @@ public class Book {
 	@Column(name = "ID")
 	@javax.persistence.GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(name = "TITLE")
 	private String title;
 

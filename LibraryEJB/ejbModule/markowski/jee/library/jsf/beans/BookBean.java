@@ -21,7 +21,7 @@ public class BookBean {
 	public List<Book> getBooks() {
 		return bookService.getBooks();
 	}
-	
+
 	private Book book;
 
 	public Book getBook() {
