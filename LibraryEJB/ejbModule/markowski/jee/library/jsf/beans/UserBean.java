@@ -20,11 +20,12 @@ public class UserBean {
 	@EJB
 	UserManagementService userService;
 
+	private User user;
+	private String repeatPassword;
+
 	public List<User> getUsers() {
 		return userService.getUsers();
 	}
-
-	private User user;
 
 	public User getUser() {
 		if (user == null) {
@@ -34,12 +35,25 @@ public class UserBean {
 	}
 
 	public void registerNewUser() {
-		user.setPassword(generate(user.getPassword()));
+		user.setPassword(generatePasswordHash(user.getPassword()));
 		userService.registerNewUser(user);
 	}
 
-	private String generate(String password) {
+	public Boolean correctPasswords() {
+		return repeatPassword != null && user.getPassword() != null
+				&& repeatPassword.equals(user.getPassword());
+	}
+
+	private String generatePasswordHash(String password) {
 		return Util.createPasswordHash("SHA-256", "BASE64", null, null,
 				password);
+	}
+
+	public String getRepeatPassword() {
+		return repeatPassword;
+	}
+
+	public void setRepeatPassword(String repeatPassword) {
+		this.repeatPassword = repeatPassword;
 	}
 }

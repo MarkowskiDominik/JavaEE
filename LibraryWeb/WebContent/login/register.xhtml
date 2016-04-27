@@ -8,13 +8,13 @@
 	<h:form prependId="false">
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Login:" />
-			<h:inputText value="#{userBean.user.login}" />
+			<h:inputText value="#{userBean.user.login}" required="true"/>
 			<h:outputLabel value="Password:" />
-			<h:inputSecret value="#{userBean.user.password}" />
+			<h:inputSecret value="#{userBean.user.password}" required="true"/>
 			<h:outputLabel value="Repeat Password:" />
-			<h:inputSecret value="#{userBean.user.password}" />
+			<h:inputSecret value="#{userBean.repeatPassword}" required="true"/>
 		</h:panelGrid>
-		<h:commandButton value="Finish" action="#{userBean.registerNewUser()}" />
+		<h:commandButton value="Finish" action="#{userBean.registerNewUser()}" disabled="#{userBean.correctPasswords()}" />
 		<h:commandButton value="Cancel" action="booksList.jsf" />
 	</h:form>
 </body>
